@@ -8,7 +8,7 @@ public class BestScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerPrefs.GetInt("bestscore")==Score.score) GetComponent<Text>().text = "New Best!";
+        if (PlayerPrefs.GetInt("bestscore") < Score.score) GetComponent<Text>().text = "New Best!";
         else GetComponent<Text>().text = "Best : " + PlayerPrefs.GetInt("bestscore");
     }
 }

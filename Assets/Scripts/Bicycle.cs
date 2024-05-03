@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class bic : MonoBehaviour
 {
-    public float speed;
+    public float speed = 9;
     
     void Update()
     {
