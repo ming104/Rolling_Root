@@ -18,6 +18,7 @@ public class MakeEnemy : MonoBehaviour
     void Start()
     {
         setBicycle = GetComponent<AudioSource>();
+        setBicycle.volume = PlayerPrefs.GetFloat("sfxSoundVolume");
         StartCoroutine("MakeIceCream");
         StartCoroutine("MakeBicycle");
         _iceCreamSummonTime = 5f;

@@ -19,6 +19,7 @@ public class SettingManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         GameStartPanelOff();
         SettingPanelOff();
         if (!PlayerPrefs.HasKey("bgmSoundVolume") && !PlayerPrefs.HasKey("sfxSoundVolume"))
@@ -32,8 +33,8 @@ public class SettingManager : MonoBehaviour
             PlayerPrefs.SetInt("ItemBestScore", 0);
         }
 
-        nomalScoreText.text = $"-최고 점수 : {PlayerPrefs.GetInt("NomalBestScore")}";
-        itemScoreText.text = $"-최고 점수 : {PlayerPrefs.GetInt("ItemBestScore")}";
+        nomalScoreText.text = $"-최고 점수 : {PlayerPrefs.GetInt("NomalBestScore")}점";
+        itemScoreText.text = $"-최고 점수 : {PlayerPrefs.GetInt("ItemBestScore")}점";
         bgmSlider.value = PlayerPrefs.GetFloat("bgmSoundVolume");
         sfxSlider.value = PlayerPrefs.GetFloat("sfxSoundVolume");
     }
@@ -81,11 +82,13 @@ public class SettingManager : MonoBehaviour
 
     public void NomalGameStart()
     {
-        Debug.Log("NomalGameStart");
+        SceneManager.LoadScene("Nomalplay");
+        //Debug.Log("NomalGameStart");
     }
     
     public void ItemGameStart()
     {
-        Debug.Log("ItemGameStart");
+        SceneManager.LoadScene("Itemplay");
+        //Debug.Log("ItemGameStart");
     }
 }

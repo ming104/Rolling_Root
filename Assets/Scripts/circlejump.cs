@@ -12,39 +12,40 @@ public class circlejump : MonoBehaviour
     float timer = 0;
     public float t;
     private Animator anim;
+    private Rigidbody2D _rigid;
+    
+    public static int JumpCount;
 
     void Start()
     {
         Score.score = 0;
         t = 0;
-        soundJump = GetComponent<AudioSource>();
-        anim = gameObject.GetComponent<Animator>();
+        JumpCount = 0;
+        //soundJump = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
+        _rigid = GetComponent<Rigidbody2D>();
+
+        soundJump.volume = PlayerPrefs.GetFloat("sfxSoundVolume");
+        
     }
     // Update is called once per frame
     void Update()
     {
         if (Input.anyKeyDown)
         {
-
-            if (isJumping == false)
+            if (isJumping == false && PlayManager.Instance.RootDie == false)
             {
                 soundJump.time = 0.12f;
                 soundJump.Play();
+                JumpCount++;
 
                 isJumping = true;
 
-                GetComponent<Rigidbody2D>().AddForce(Vector3.up * jump);
+                _rigid.AddForce(Vector3.up * jump);
 
             }
-
         }
-        // ����___________________________________________________________
-        t += 1;
-        if (t > 50)
-        {
-            timeDiff -= 0.01f;
-            t = 0;
-        }
+         // ����___________________________________________________________
         timer += Time.deltaTime;
         if (timer > timeDiff)
         {
@@ -58,13 +59,13 @@ public class circlejump : MonoBehaviour
         {
             isJumping = false;
         }
-        if(col.gameObject.CompareTag("Enemy"))
-        {
-            if (Score.score > PlayerPrefs.GetInt("bestscore"))
-            {
-                PlayerPrefs.SetInt("bestscore", Score.score);
-            }
-            SceneManager.LoadScene("GameOverScene");
-        }
+        // if (col.gameObject.CompareTag("Enemy"))
+        // {
+        //     if (Score.score > PlayerPrefs.GetInt("bestscore"))
+        //     {
+        //         PlayerPrefs.SetInt("bestscore", Score.score);
+        //     }
+        //     SceneManager.LoadScene("GameOverScene");
+        // }
     }
 }
